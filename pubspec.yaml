@@ -57,10 +57,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/ic_search.png
   fonts:
     - family: SeymourOne
       fonts:
         - asset: assets/fonts/SeymourOne.ttf
+        - asset: assets/fonts/SFCompactRegular.ttf
+        - asset: assets/fonts/SFCompactMedium.ttf
+        - asset: assets/fonts/SFCompactSemibold.ttf
+        - asset: assets/fonts/SFCompactBold.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

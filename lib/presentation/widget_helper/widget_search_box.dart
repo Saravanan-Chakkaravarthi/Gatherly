@@ -1,59 +1,38 @@
 import 'package:flutter/material.dart';
 
-class WidgetSearchBox extends StatefulWidget {
-  final String hintText;
-  const WidgetSearchBox({super.key, required this.hintText});
+import '../../utils/app_margins.dart';
+import '../../utils/app_text_style.dart';
+import '../../utils/color_assets.dart';
 
-  @override
-  State<WidgetSearchBox> createState() => _WidgetSearchBoxState();
-}
 
-class _WidgetSearchBoxState extends State<WidgetSearchBox> {
-  List<String> items = [
-    "First Name",
-    "Second Name",
-    "Third Name",
-    "Fourth Name"
-  ];
-  List<String> _searchedItems = [];
-
-  void filter(String searchText) {
-    List<String> results = [];
-    if (searchText.isEmpty) {
-      results = items;
-    } else {
-      results = items
-          .where((element) =>
-              element.toLowerCase().contains(searchText.toLowerCase()))
-          .toList();
-    }
-    setState(() {
-      _searchedItems = results;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _searchedItems = items;
-  }
+class SearchWidget extends StatelessWidget {
+  final VoidCallback filteredValue;
+  const SearchWidget({super.key, required this.filteredValue});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) {
-        filter(value);
-      },
+      onChanged: (value) => filteredValue,
       decoration: InputDecoration(
-          labelText: widget.hintText, labelStyle: TextStyle(color: Colors.black)),
+        prefixIcon: const Icon(
+          Icons.search,
+          color: AppColors.gray,
+        ),
+        fillColor: Colors.white,
+        filled: true,
+        hintText: "Search",
+        hintStyle: sfCompactRegular(),
+        labelStyle: sfCompactRegular(),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(
+              color: AppColors.gray,
+              width: AppMargins.dm_01
+          ),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+      ),
+      keyboardType: TextInputType.name,
+      textInputAction: TextInputAction.search,
     );
   }
 }
-/*
-Expanded(
-child: ListView.builder(
-itemCount: _searchedItems.length,
-itemBuilder: (context, index) {
-final name = _searchedItems[index];
-return Text(name);
-}))*/

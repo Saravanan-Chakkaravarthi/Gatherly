@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gatherly/navigation/app_route_paths.dart';
+import 'package:gatherly/presentation/screens/home/home_screen.dart';
 
 import '../../../utils/app_text_style.dart';
 import '../../../utils/constants.dart';
@@ -20,7 +21,11 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds: 3),
-        () => Navigator.pushNamed(context, RoutePaths.homeRoute));
+        () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => const HomeScreen(),
+          ),));
   }
 
   @override
