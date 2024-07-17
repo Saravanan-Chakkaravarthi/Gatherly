@@ -6,13 +6,13 @@ import '../../utils/color_assets.dart';
 
 
 class SearchWidget extends StatelessWidget {
-  final VoidCallback filteredValue;
+  final ValueChanged<String> filteredValue;
   const SearchWidget({super.key, required this.filteredValue});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) => filteredValue,
+      onChanged: filteredValue,
       decoration: InputDecoration(
         prefixIcon: const Icon(
           Icons.search,
