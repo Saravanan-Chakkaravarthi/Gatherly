@@ -6,25 +6,34 @@ import 'package:gatherly/utils/color_assets.dart';
 import 'package:gatherly/utils/screen_dimensions.dart';
 
 class StallItemWidget extends StatelessWidget {
-  final EventsModel? event;
+  final EventsModel event;
 
-  const StallItemWidget({super.key, this.event});
+  const StallItemWidget({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: getScreenWidth(context),
-      height: MediaQuery.of(context).size.height / 2,
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(AppMargins.dm_14)),
-          color: AppColors.white_100),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          buildVerticalSpace(AppMargins.dm_16),
-          Image.asset(event?.eventImage ?? ''),
-          Row(
+    return Column(
+      children: [
+        const SizedBox(height: 16),
+        ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(AppMargins.dm_26),
+                topRight: Radius.circular(AppMargins.dm_26)),
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: Image.network(
+                  event.eventImage ?? '',
+                  fit: BoxFit.cover,
+                ))),
+        Container(
+          padding: const EdgeInsets.all(AppMargins.dm_16),
+          decoration: const BoxDecoration(
+              color: AppColors.white_100,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(AppMargins.dm_26),
+                  bottomRight: Radius.circular(AppMargins.dm_26))),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -32,41 +41,47 @@ class StallItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildVerticalSpace(AppMargins.dm_06),
+                  buildVerticalSpace(AppMargins.dm_01),
                   Text(
-                    "${event?.eventStartDate} - ${event?.eventEndDate}, 2024",
+                    "${event.eventStartDate} - ${event.eventEndDate}, 2024",
                     style: sfCompactMedium(),
                   ),
-                  buildVerticalSpace(AppMargins.dm_06),
-                  Text(
-                    "${event?.eventName}",
-                    style: sfCompactSemiBold(),
+                  buildVerticalSpace(AppMargins.dm_01),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    child: Text(
+                      "${event.eventName}",
+                      style: sfCompactSemiBold(AppMargins.dm_18),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  buildVerticalSpace(AppMargins.dm_06),
+                  buildVerticalSpace(AppMargins.dm_01),
                   Text(
-                    "${event?.eventVenue}",
+                    "${event.eventVenue}",
                     style: sfCompactRegular(),
                   ),
-                  buildVerticalSpace(AppMargins.dm_06),
+                  buildVerticalSpace(AppMargins.dm_01),
                   Text(
-                    "${event?.files}",
+                    "${event.files}",
                     style: sfCompactRegular(),
                   ),
                 ],
               ),
               FloatingActionButton(
-                  onPressed: () {},
-                  foregroundColor: AppColors.colorWhite,
-                  backgroundColor: AppColors.red_300,
-                  child: const Icon(
-                    Icons.add,
-                    color: AppColors.colorWhite,
-                  ),
+                shape: const CircleBorder(),
+                onPressed: () {},
+                foregroundColor: AppColors.colorWhite,
+                backgroundColor: AppColors.red_300,
+                child: const Icon(
+                  Icons.add,
+                  color: AppColors.colorWhite,
+                ),
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

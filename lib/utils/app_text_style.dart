@@ -26,9 +26,9 @@ TextStyle sfCompactMedium() => const TextStyle().copyWith(
       fontSize: AppMargins.dm_16,
     );
 
-TextStyle sfCompactSemiBold() => const TextStyle().copyWith(
+TextStyle sfCompactSemiBold(double fontSize) => const TextStyle().copyWith(
       fontStyle: FontStyle.normal,
       fontWeight: FontWeight.w600,
       color: AppColors.colorBlack,
-      fontSize: AppMargins.dm_32,
+      fontSize: fontSize,
     );
